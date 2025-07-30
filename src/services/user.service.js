@@ -18,6 +18,23 @@ const createUser = async (userBody) => {
 };
 
 
+const addProfileImage = async (file, userid) => {
+
+
+  console.log("file and user id", file, userid);
+
+  const fiends = await User.findById(userid); // Get user
+
+  if (fiends.profileImage) {
+    unlinkImages(fiends.profileImage); // Remove old image
+  }
+
+  fiends.profileImage = file.path; // Set new image path
+  return fiends.save(); // Save user
+};
+
+
+
 
 const queryUsers = async (filter, options) => {
   const query = {};
@@ -109,6 +126,7 @@ const isUpdateUser = async (userId, updateBody) => {
 
 module.exports = {
   createUser,
+  addProfileImage,
   queryUsers,
   getUserById,
   getUserByEmail,

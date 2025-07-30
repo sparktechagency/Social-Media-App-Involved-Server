@@ -62,9 +62,14 @@ app.use("/api/v1", routes);
 
 //testing API is alive
 app.get("/api/v1/test", (req, res) => {
-  res.status(httpStatus.OK).send({
-    message: "API is running",
-  });
+
+  res.send(
+    {
+      status: "OK",
+      statusCode: httpStatus.OK,
+      message: "API is alive"
+    }
+  );
 });
 
 // send back a 404 error for any unknown api request

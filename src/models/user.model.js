@@ -57,6 +57,11 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: roles,
     },
+    favoriteEventTypes: {
+      type: Array,
+      required: false,
+      default: null
+    },
     callingCode: {
       type: String,
       required: false,

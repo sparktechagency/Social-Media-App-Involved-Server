@@ -53,6 +53,26 @@ const register = catchAsync(async (req, res) => {
   );
 });
 
+const addProfileImage = catchAsync(async (req, res) => {
+
+  if (!req.file) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Image not found");
+  }
+
+  const userid = req.user._id;
+
+  const user = await userService.addProfileImage(req.file, userid);
+  res.status(httpStatus.OK).json(
+    response({
+      message: "Profile Image Added Successfully",
+      status: "OK",
+      statusCode: httpStatus.OK,
+      data: { user },
+    })
+  );
+});
+
+
 const login = catchAsync(async (req, res) => {
   const { email, password, fcmToken } = req.body;
   const isUser = await userService.getUserByEmail(email);
@@ -202,6 +222,7 @@ const deleteMe = catchAsync(async (req, res) => {
 
 module.exports = {
   register,
+  addProfileImage,
   login,
   logout,
   refreshTokens,
