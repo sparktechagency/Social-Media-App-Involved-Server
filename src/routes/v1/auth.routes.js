@@ -12,6 +12,7 @@ const router = express.Router();
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.patch('/add-profileImage', auth('common'), [uploadUsers.single("profileImage")], authController.addProfileImage);
+router.patch('/favorite-events', auth('common'), authController.favoriteEvents);
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);

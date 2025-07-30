@@ -57,8 +57,24 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: roles,
     },
-    favoriteEventTypes: {
-      type: Array,
+    favoriteEvents: {
+      type: [String],
+      required: false,
+      enum: ["Dining", "Entertainment", "Activities", "Catering", "Transportation", "Venues", "Map"],
+      default: null
+    },
+    interestedEvent: {
+      type: [mongoose.Schema.Types.ObjectId],
+      required: false,
+      default: null
+    },
+    goingEvents: {
+      type: [mongoose.Schema.Types.ObjectId],
+      required: false,
+      default: null
+    },
+    bookMarksEvents: {
+      type: [mongoose.Schema.Types.ObjectId],
       required: false,
       default: null
     },

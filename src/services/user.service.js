@@ -19,10 +19,6 @@ const createUser = async (userBody) => {
 
 
 const addProfileImage = async (file, userid) => {
-
-
-  console.log("file and user id", file, userid);
-
   const fiends = await User.findById(userid); // Get user
 
   if (fiends.profileImage) {
@@ -33,6 +29,16 @@ const addProfileImage = async (file, userid) => {
   return fiends.save(); // Save user
 };
 
+
+const favoriteEvents = async (userid, body) => {
+
+  // console.log(body);
+  // return;
+
+  const fiends = await User.findById(userid); // Get user
+  fiends.favoriteEvents = body.favoriteEvents;
+  return fiends.save(); // Save user
+};
 
 
 
@@ -127,6 +133,7 @@ const isUpdateUser = async (userId, updateBody) => {
 module.exports = {
   createUser,
   addProfileImage,
+  favoriteEvents,
   queryUsers,
   getUserById,
   getUserByEmail,

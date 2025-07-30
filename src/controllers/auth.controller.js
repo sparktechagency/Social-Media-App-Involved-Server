@@ -72,6 +72,18 @@ const addProfileImage = catchAsync(async (req, res) => {
   );
 });
 
+const favoriteEvents = catchAsync(async (req, res) => {
+  const user = await userService.favoriteEvents(req.user._id, req.body);
+  res.status(httpStatus.OK).json(
+    response({
+      message: "Favorite Events Added Successfully",
+      status: "OK",
+      statusCode: httpStatus.OK,
+      data: { user },
+    })
+  );
+});
+
 
 const login = catchAsync(async (req, res) => {
   const { email, password, fcmToken } = req.body;
@@ -223,6 +235,7 @@ const deleteMe = catchAsync(async (req, res) => {
 module.exports = {
   register,
   addProfileImage,
+  favoriteEvents,
   login,
   logout,
   refreshTokens,
