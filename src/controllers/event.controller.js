@@ -10,6 +10,7 @@ const createEvent = catchAsync(async (req, res) => {
     }
     // Set user ID from auth context
     req.body.createdBy = req.user._id;
+    
     const event = await eventService.createEvent(req.body);
     res.status(httpStatus.CREATED).json(
         response({
