@@ -1,4 +1,6 @@
+const httpStatus = require("http-status");
 const { Album } = require("../models");
+const ApiError = require("../utils/ApiError");
 
 
 const createAlbum = async (albumData) => {
@@ -7,7 +9,10 @@ const createAlbum = async (albumData) => {
 };
 
 const getAllAlbums = async (userId) => {
-    const albums = await Album.find({ user: userId });
+    const albums = await Album.find({ user: userId }).populate("events");
+    if (!albums) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Album not found");
+    }
     return albums;
 };
 
@@ -15,3 +20,5 @@ module.exports = {
     createAlbum,
     getAllAlbums
 };
+
+
