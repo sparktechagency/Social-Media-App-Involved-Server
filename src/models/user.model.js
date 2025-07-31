@@ -63,7 +63,7 @@ const userSchema = mongoose.Schema(
       enum: ["Dining", "Entertainment", "Activities", "Catering", "Transportation", "Venues", "Map"],
       default: null
     },
-    interestedEvent: {
+    interestedEvents: {
       type: [mongoose.Schema.Types.ObjectId],
       required: false,
       default: null
@@ -76,7 +76,9 @@ const userSchema = mongoose.Schema(
     bookMarksEvents: {
       type: [mongoose.Schema.Types.ObjectId],
       required: false,
+      ref: "Event",
       default: null
+
     },
     callingCode: {
       type: String,

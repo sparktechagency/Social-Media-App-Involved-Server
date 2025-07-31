@@ -1,0 +1,109 @@
+const httpStatus = require("http-status");
+const { Event, User } = require("../models");
+const ApiError = require("../utils/ApiError");
+
+const createEvent = async (data) => {
+    const event = await Event.create(data);
+    return event;
+};
+
+const getAllEvents = async (searchPearms) => {
+
+    if (searchPearms) {
+        const events = await Event.find({ category: searchPearms });
+        return events;
+    }
+    const events = await Event.find();
+    return events;
+};
+
+
+const getSingleEvent = async (id) => {
+    const event = await Event.findById(id);
+    return event;
+};
+
+const filterEvent = async (data) => {
+    const events = await Event.find({
+        location: data.location,
+        category: data.category,
+        eventDate: data.eventDate
+    });
+    if (!events) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "No events found");
+    }
+    return events;
+};
+
+
+const searchEvent = async (data) => {
+    if (!data.title || typeof data.title !== "string") {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Search term is required");
+    }
+
+    const events = await Event.find({
+        title: { $regex: data.title, $options: "i" }, // Partial + case-insensitive
+    });
+
+    if (!events || events.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No matching events found");
+    }
+
+    return events;
+};
+
+const interestedEvent = async (userId, id) => {
+    const findUserById = await User.findById(userId);
+    const filteredEvents = findUserById.interestedEvents.filter((item) => item == id);
+    if (filteredEvents) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Event already exists");
+    }
+    findUserById.interestedEvents.push(id);
+    const event = await findUserById.save();
+    return event;
+};
+
+const goingEvent = async (userId, id) => {
+    const findUserById = await User.findById(userId);
+    if (findUserById.goingEvents.includes(id)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Event already exists");
+    }
+    findUserById.goingEvents.push(id);
+    const event = await findUserById.save();
+    return event;
+};
+
+const favoriteEvent = async (userId, id) => {
+    const findUserById = await User.findById(userId);
+
+
+    if (findUserById.bookMarksEvents.includes(id)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Event already exists");
+    }
+
+    findUserById.bookMarksEvents.push(id);
+    const event = await findUserById.save();
+    return event;
+};
+
+const getFavoriteEvents = async (userId) => {
+    const findUserById = await User.findById(userId).populate("bookMarksEvents");
+    if (!findUserById) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+    }
+    return findUserById.bookMarksEvents;
+};
+
+
+
+module.exports = {
+    createEvent,
+    getAllEvents,
+    getSingleEvent,
+    filterEvent,
+    searchEvent,
+    interestedEvent,
+    goingEvent,
+    favoriteEvent,
+    getFavoriteEvents
+};
