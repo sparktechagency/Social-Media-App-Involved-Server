@@ -18,7 +18,7 @@ router
   .patch(
     auth("common"),
     validate(userValidation.updateUser),
-    [uploadUsers.single("image")],
+    [uploadUsers.single("profileImage")],
     convertHeicToPngMiddleware(UPLOADS_FOLDER_USERS),
     userController.updateProfile
   );

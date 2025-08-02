@@ -8,17 +8,17 @@ const router = express.Router();
 
 router
     .post('/create', auth('admin'),
-        validate(subscriptionValidation.createSubscription),
+        validate(subscriptionValidation.createSubscription) ,
         subscriptionController.createSubscription
     );
 router
     .get('/all',
-        auth('admin'),
+        auth('common'),
         subscriptionController.getAllSubscriptions);
 
 router
     .get('/single/:id',
-        auth('admin'),
+        auth('common'),
         subscriptionController.getSingleSubscription);
 
 router

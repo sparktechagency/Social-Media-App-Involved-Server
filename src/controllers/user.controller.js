@@ -105,7 +105,7 @@ const updateUser = catchAsync(async (req, res) => {
 
 const updateProfile = catchAsync(async (req, res) => {
   if (req.file) {
-    req.body.image = `/uploads/users/${req.file.filename}`;
+    req.body.profileImage = `/uploads/users/${req.file.filename}`;
   }
 
   // Set fullName if firstName or lastName is provided
