@@ -5,6 +5,7 @@ const userRoute = require("./user.routes");
 const docsRoute = require("./docs.routes");
 const eventRoute = require("./event.routes");
 const albumRoute = require("./album.routes");
+const subscriptionRoute = require("./subscription.routes");
 
 
 const router = express.Router();
@@ -25,8 +26,11 @@ const defaultRoutes = [
   {
     path: "/albums",
     route: albumRoute,
-  }
-
+  },
+  {
+    path: "/subscriptions",
+    route: subscriptionRoute,
+  },
 ];
 
 const devRoutes = [

@@ -65,8 +65,13 @@ const queryUsers = async (filter, options) => {
 };
 
 const getAllUsers = async () => {
-  return User.find({ role: "user" });
+  return User.find({ role: "user" }).sort({ createdAt: -1 });
 };
+
+// last 7 day's 
+const getResentUsers = async () => {
+  return User.find({ role: "user" }).sort({ createdAt: -1 }).limit(8);
+}
 
 
 const getUserById = async (id) => {
@@ -140,6 +145,7 @@ module.exports = {
   queryUsers,
   getUserById,
   getAllUsers,
+  getResentUsers,
   getUserByEmail,
   updateUserById,
   deleteUserById,

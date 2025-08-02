@@ -25,6 +25,7 @@ router
 
 
 router.get("/all", auth("admin"), userController.getAllUsers);
+router.get("/resent", auth("admin"), userController.getResentUsers);
 router.get("/single/:id", auth("common"), userController.getSingleUser);
 
 

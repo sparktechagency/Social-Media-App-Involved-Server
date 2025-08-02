@@ -149,8 +149,21 @@ const getAllUsers = catchAsync(async (req, res) => {
   );
 });
 
+
+const getResentUsers = catchAsync(async (req, res) => {
+  const users = await userService.getResentUsers();
+  res.status(httpStatus.OK).json(
+    response({
+      message: "All Users",
+      status: "OK",
+      statusCode: httpStatus.OK,
+      data: users,
+    })
+  );
+});
+
 const getSingleUser = catchAsync(async (req, res) => {
-  
+
   const user = await userService.getUserById(req.params.id);
   res.status(httpStatus.OK).json(
     response({
@@ -171,5 +184,7 @@ module.exports = {
   updateProfile,
   deleteUser,
   getAllUsers,
+  getResentUsers,
   getSingleUser,
+
 };
