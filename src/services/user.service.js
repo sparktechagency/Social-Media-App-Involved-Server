@@ -64,6 +64,9 @@ const queryUsers = async (filter, options) => {
   return users;
 };
 
+const getAllUsers = async () => {
+  return User.find({ role: "user" });
+};
 
 
 const getUserById = async (id) => {
@@ -136,6 +139,7 @@ module.exports = {
   favoriteEvents,
   queryUsers,
   getUserById,
+  getAllUsers,
   getUserByEmail,
   updateUserById,
   deleteUserById,

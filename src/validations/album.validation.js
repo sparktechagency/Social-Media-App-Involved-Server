@@ -6,8 +6,7 @@ const createAlbum = {
     body: joi.object().keys({
         title: joi.string().required(),
         image: joi.string(),
-        events: joi.array(),
-        user: joi.string().required(),
+        events: joi.array()
     }),
 };
 

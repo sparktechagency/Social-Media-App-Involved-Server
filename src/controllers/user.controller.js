@@ -137,6 +137,31 @@ const deleteUser = catchAsync(async (req, res) => {
   );
 });
 
+const getAllUsers = catchAsync(async (req, res) => {
+  const users = await userService.getAllUsers();
+  res.status(httpStatus.OK).json(
+    response({
+      message: "All Users",
+      status: "OK",
+      statusCode: httpStatus.OK,
+      data: users,
+    })
+  );
+});
+
+const getSingleUser = catchAsync(async (req, res) => {
+  
+  const user = await userService.getUserById(req.params.id);
+  res.status(httpStatus.OK).json(
+    response({
+      message: "User",
+      status: "OK",
+      statusCode: httpStatus.OK,
+      data: user,
+    })
+  );
+});
+
 module.exports = {
   createUser,
   getUsers,
@@ -145,4 +170,6 @@ module.exports = {
   updateUser,
   updateProfile,
   deleteUser,
+  getAllUsers,
+  getSingleUser,
 };

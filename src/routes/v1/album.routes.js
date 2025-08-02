@@ -13,6 +13,7 @@ const uploadUsers = userFileUploadMiddleware(UPLOADS_FOLDER_USERS);
 
 
 router.post("/create", auth("common"), uploadUsers.single("image"), validate(albumValidation.createAlbum), albumController.createAlbum);
+router.patch("/set-album-items", auth("common"), albumController.setAlbumItems);
 router.get("/all", auth("common"), albumController.getAllAlbums); 
 
 

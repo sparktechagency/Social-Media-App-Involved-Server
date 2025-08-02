@@ -94,6 +94,29 @@ const getFavoriteEvents = async (userId) => {
     return findUserById.bookMarksEvents;
 };
 
+const approveEvent = async (id) => {
+    const event = await Event.findById(id);
+    if (!event) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Event not found");
+    }
+    if (event.isApproved) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Event already approved");
+    }
+    event.isApproved = true;
+    event.isShow = true;
+    await event.save();
+
+    return event;
+};
+
+const deleteEvent = async (id) => {
+    const event = await Event.findByIdAndDelete(id);
+    if (!event) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Event not found");
+    }
+    return event;
+};
+
 
 
 module.exports = {
@@ -105,5 +128,7 @@ module.exports = {
     interestedEvent,
     goingEvent,
     favoriteEvent,
-    getFavoriteEvents
+    getFavoriteEvents,
+    approveEvent,
+    deleteEvent
 };

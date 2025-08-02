@@ -27,5 +27,8 @@ router.post("/going/:id", auth("common"), eventController.goingEvent);
 router.post("/favorite/:id", auth("common"), eventController.favoriteEvent);
 router.get("/favorites", auth("common"), eventController.getFavoriteEvents);
 
+// approve & reject event 
+router.post("/approve", auth("admin"), eventController.approveEvent);
+router.delete("/delete", auth("admin"), eventController.deleteEvent);
 
 module.exports = router;

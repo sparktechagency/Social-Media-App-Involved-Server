@@ -23,6 +23,9 @@ router
     userController.updateProfile
   );
 
-  
+
+router.get("/all", auth("admin"), userController.getAllUsers);
+router.get("/single/:id", auth("common"), userController.getSingleUser);
+
 
 module.exports = router;

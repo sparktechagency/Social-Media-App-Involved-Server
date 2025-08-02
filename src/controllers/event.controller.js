@@ -10,7 +10,7 @@ const createEvent = catchAsync(async (req, res) => {
     }
     // Set user ID from auth context
     req.body.createdBy = req.user._id;
-    
+
     const event = await eventService.createEvent(req.body);
     res.status(httpStatus.CREATED).json(
         response({
@@ -125,6 +125,31 @@ const getFavoriteEvents = catchAsync(async (req, res) => {
     );
 });
 
+const approveEvent = catchAsync(async (req, res) => {
+    const event = await eventService.approveEvent(req.body.eventId);
+    res.status(httpStatus.OK).json(
+        response({
+            message: "Single Event Approved",
+            status: "OK",
+            statusCode: httpStatus.OK,
+            data: event,
+        })
+    );
+});
+
+const deleteEvent = catchAsync(async (req, res) => {
+    const event = await eventService.deleteEvent(req.body.eventId);
+    res.status(httpStatus.OK).json(
+        response({
+            message: "Single Event Deleted",
+            status: "OK",
+            statusCode: httpStatus.OK,
+            data: event,
+        })
+    );
+});
+
+
 module.exports = {
     createEvent,
     getAllEvents,
@@ -134,5 +159,7 @@ module.exports = {
     interestedEvent,
     goingEvent,
     favoriteEvent,
-    getFavoriteEvents
+    getFavoriteEvents,
+    approveEvent,
+    deleteEvent
 };
