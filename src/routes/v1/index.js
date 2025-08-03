@@ -8,6 +8,7 @@ const albumRoute = require("./album.routes");
 const subscriptionRoute = require("./subscription.routes");
 const privacyPolicyRoute = require("./privacyPolicy.routes");
 const termsConditionRoute = require("./termsCondition.routes");
+const aboutUsRoute = require("./aboutUs.routes");
 
 
 const router = express.Router();
@@ -40,7 +41,11 @@ const defaultRoutes = [
   {
     path: "/terms-condition",
     route: termsConditionRoute,
-  }
+  },
+  {
+    path: "/about-us",
+    route: aboutUsRoute,
+  },
 ];
 
 const devRoutes = [

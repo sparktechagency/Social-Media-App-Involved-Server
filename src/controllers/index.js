@@ -5,6 +5,7 @@ module.exports.albumController = require('./album.controller');
 module.exports.subscriptionController = require('./subscription.controller');
 module.exports.privacyPolicyController = require('./privacyPolicy.controller');
 module.exports.termsConditionController = require('./termsCondition.controller');
+module.exports.aboutUsController = require('./aboutUs.controller');
 
 
 
