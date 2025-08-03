@@ -59,7 +59,9 @@ const addProfileImage = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "Image not found");
   }
 
+
   const userid = req.user._id;
+
 
   const user = await userService.addProfileImage(req.file, userid);
   res.status(httpStatus.OK).json(

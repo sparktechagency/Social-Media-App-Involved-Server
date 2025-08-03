@@ -24,8 +24,10 @@ const addProfileImage = async (file, userid) => {
   if (fiends.profileImage) {
     unlinkImages(fiends.profileImage); // Remove old image
   }
+  if (file) {
+    fiends.profileImage = `/uploads/users/${file.filename}`;
+  }
 
-  fiends.profileImage = file.path; // Set new image path
   return fiends.save(); // Save user
 };
 

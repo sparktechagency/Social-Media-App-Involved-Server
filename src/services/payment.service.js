@@ -1,5 +1,5 @@
 const { Payment, User } = require("../models");
-
+const cron = require('node-cron');
 
 const createPayment = async (payload) => {
     // Find the user
@@ -25,9 +25,32 @@ const createPayment = async (payload) => {
 };
 
 const getAllPayment = async () => {
-    const payment = await Payment.find().populate("userId").populate("subscriptionId");
-    return payment;
+    // First fetch all payments with populated user and subscription data
+    const allPayments = await Payment.find()
+        .populate("userId")
+        .populate("subscriptionId");
+
+    // Filter payments to only include those where the user is subscribed
+    const subscribedPayments = allPayments.filter(payment => {
+        // Check if userId exists and if the user is subscribed
+        return payment.userId && payment.userId.isSubscribed === true;
+    });
+
+    return subscribedPayments;
 };
+
+cron.schedule('0 1 * * *', async () => {
+    const userFind = await User.find({ isSubscribed: true });
+
+    userFind.forEach(async (user) => {
+        if (user.subscriptionEndDate < Date.now()) {
+            user.isSubscribed = false;
+            await user.save();
+        }
+    });
+
+});
+
 
 module.exports = {
     createPayment,
