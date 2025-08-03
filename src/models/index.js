@@ -9,3 +9,4 @@ module.exports.PrivacyPolicy = require('./privacyPolicy.model');
 module.exports.Support = require('./support.model');
 module.exports.Event = require('./event.model');
 module.exports.Album = require('./album.model');
+module.exports.Payment = require('./payment.model');

@@ -9,6 +9,7 @@ const subscriptionRoute = require("./subscription.routes");
 const privacyPolicyRoute = require("./privacyPolicy.routes");
 const termsConditionRoute = require("./termsCondition.routes");
 const aboutUsRoute = require("./aboutUs.routes");
+const paymentRoute = require("./payment.routes");
 
 
 const router = express.Router();
@@ -46,6 +47,12 @@ const defaultRoutes = [
     path: "/about-us",
     route: aboutUsRoute,
   },
+
+  {
+    path: "/payment",
+    route: paymentRoute,
+  }
+
 ];
 
 const devRoutes = [

@@ -8,3 +8,4 @@ module.exports.subscriptionService = require('./subscription.service');
 module.exports.privacyPolicyService = require('./privacyPolicy.service');
 module.exports.termsConditionService = require('./termsCondition.service');
 module.exports.aboutUsService = require('./aboutUs.service');
+module.exports.paymentService = require('./payment.service'); 

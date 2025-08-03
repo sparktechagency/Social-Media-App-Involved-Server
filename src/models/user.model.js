@@ -110,11 +110,30 @@ const userSchema = mongoose.Schema(
       required: false,
       default: null
     },
+
     oneTimeCode: {
       type: String,
       required: false,
       default: null
     },
+    // ================ subscription =================
+    subscribtionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subscription",
+      required: false,
+      default: null
+    },
+    subscriptionEndDate: {
+      type: Date,
+      required: false,
+      default: null
+    },
+    isSubscribed: {
+      type: Boolean,
+      default: false
+    },
+
+
     isEmailVerified: {
       type: Boolean,
       default: false,

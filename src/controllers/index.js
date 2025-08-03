@@ -6,6 +6,7 @@ module.exports.subscriptionController = require('./subscription.controller');
 module.exports.privacyPolicyController = require('./privacyPolicy.controller');
 module.exports.termsConditionController = require('./termsCondition.controller');
 module.exports.aboutUsController = require('./aboutUs.controller');
-
+module.exports.paymentController = require('./payment.controller');
+module.exports.paymentService = require('../services/payment.service');
 
 
