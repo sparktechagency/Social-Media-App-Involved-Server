@@ -4,14 +4,12 @@ const aboutUsSchema = new mongoose.Schema(
   {
     content: { 
       type: String, 
-      required: [true, "Content is required"], 
-      minlength: 10, 
-      maxlength: 2000
+      required: [true, "Content is required"]
+
     },
   },
   { 
-    timestamps: true,
-    versionKey: false
+    timestamps: true
   }
 );
 

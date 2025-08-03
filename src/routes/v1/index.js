@@ -6,7 +6,8 @@ const docsRoute = require("./docs.routes");
 const eventRoute = require("./event.routes");
 const albumRoute = require("./album.routes");
 const subscriptionRoute = require("./subscription.routes");
-const settingRoute = require("./privacyPolicy.routes");
+const privacyPolicyRoute = require("./privacyPolicy.routes");
+const termsConditionRoute = require("./termsCondition.routes");
 
 
 const router = express.Router();
@@ -32,11 +33,13 @@ const defaultRoutes = [
     path: "/subscriptions",
     route: subscriptionRoute,
   },
-
-
   {
-    path: "/settings",
-    route: settingRoute,
+    path: "/privacy-policy",
+    route: privacyPolicyRoute,
+  },
+  {
+    path: "/terms-condition",
+    route: termsConditionRoute,
   }
 ];
 

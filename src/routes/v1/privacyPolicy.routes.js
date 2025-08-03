@@ -7,9 +7,9 @@ const router = express.Router();
 
 
 router
-    .post("/privacy-policy", auth("admin"), privacyPolicyController.createPrivacyPolicy)
+    .post("/create", auth("admin"), privacyPolicyController.createPrivacyPolicy)
 
 router
-    .get("/privacy-policy", privacyPolicyController.getPrivacyPolicy);
+    .get("/all", privacyPolicyController.getPrivacyPolicy);
 
 module.exports = router;

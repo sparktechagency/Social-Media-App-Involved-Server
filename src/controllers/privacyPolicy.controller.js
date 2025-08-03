@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const { privacyPolicyService } = require("../services");
 
 const createPrivacyPolicy = catchAsync(async (req, res) => {
+ 
     const privacyPolicy = await privacyPolicyService.createPrivacyPolicy(req.body);
     res.status(httpStatus.CREATED).json(
         response({

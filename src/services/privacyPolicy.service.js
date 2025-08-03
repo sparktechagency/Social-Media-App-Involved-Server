@@ -2,6 +2,15 @@ const { PrivacyPolicy } = require("../models");
 
 
 const createPrivacyPolicy = async (privacyPolicyBody) => {
+    if (!privacyPolicyBody) {
+        throw new Error("Privacy Policy not found");
+    }
+    const findPrivacyPolicy = await PrivacyPolicy.findOne();
+    if (findPrivacyPolicy) {
+        findPrivacyPolicy.content = privacyPolicyBody.content;
+        return findPrivacyPolicy.save();
+    }
+
     const privacyPolicy = await PrivacyPolicy.create(privacyPolicyBody);
     return privacyPolicy;
 };
