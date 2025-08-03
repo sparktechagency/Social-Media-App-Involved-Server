@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
     .post('/create', auth('admin'),
-        validate(subscriptionValidation.createSubscription) ,
+        validate(subscriptionValidation.createSubscription),
         subscriptionController.createSubscription
     );
 router

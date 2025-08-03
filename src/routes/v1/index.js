@@ -6,6 +6,7 @@ const docsRoute = require("./docs.routes");
 const eventRoute = require("./event.routes");
 const albumRoute = require("./album.routes");
 const subscriptionRoute = require("./subscription.routes");
+const settingRoute = require("./privacyPolicy.routes");
 
 
 const router = express.Router();
@@ -31,6 +32,12 @@ const defaultRoutes = [
     path: "/subscriptions",
     route: subscriptionRoute,
   },
+
+
+  {
+    path: "/settings",
+    route: settingRoute,
+  }
 ];
 
 const devRoutes = [
