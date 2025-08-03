@@ -36,6 +36,10 @@ const defaultRoutes = [
     route: subscriptionRoute,
   },
   {
+    path: "/payment",
+    route: paymentRoute,
+  },
+  {
     path: "/privacy-policy",
     route: privacyPolicyRoute,
   },
@@ -47,16 +51,10 @@ const defaultRoutes = [
     path: "/about-us",
     route: aboutUsRoute,
   },
-
-  {
-    path: "/payment",
-    route: paymentRoute,
-  }
-
 ];
 
+// routes available only in development mode goes here 
 const devRoutes = [
-  // routes available only in development mode
   {
     path: "/docs",
     route: docsRoute,
