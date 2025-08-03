@@ -1,5 +1,5 @@
 const httpStatus = require("http-status");
-const { User } = require("../models");
+const { User, Notification } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { sendEmailVerification } = require("./email.service");
 const unlinkImages = require("../common/unlinkImage");
@@ -14,7 +14,24 @@ const createUser = async (userBody) => {
 
     sendEmailVerification(userBody.email, oneTimeCode);
   }
-  return User.create({ ...userBody, oneTimeCode });
+
+  const user = await User.create({
+    ...userBody,
+    oneTimeCode: oneTimeCode,
+  });
+
+  if (user.role === "user" || user.role === "admin") {
+    user.isEmailVerified = false;
+  }
+
+  const notification = await Notification.create({
+    title: "New user Created successfully",
+    content: "New user Created successfully",
+    routeringPath: "user",
+    userId: user._id,
+  });
+
+  return user;
 };
 
 

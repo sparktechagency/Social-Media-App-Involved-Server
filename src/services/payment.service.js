@@ -1,4 +1,4 @@
-const { Payment, User } = require("../models");
+const { Payment, User, Notification } = require("../models");
 const cron = require('node-cron');
 
 const createPayment = async (payload) => {
@@ -20,6 +20,14 @@ const createPayment = async (payload) => {
 
     // Create payment record
     const payment = await Payment.create(payload);
+
+    // notification
+    const notification = await Notification.create({
+        title: "New Payment Created successfully",
+        content: "New Payment Created successfully",
+        routeringPath: "payment",
+        userId: payload.userId,
+    });
 
     return payment;
 };

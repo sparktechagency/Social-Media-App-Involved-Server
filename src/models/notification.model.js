@@ -13,6 +13,11 @@ const notificationSchema = new Schema({
         ref: 'User',
         required: false
     },
+    routeringPath: {
+        type: String,
+        required: false,
+        default: null
+    },
     transactionId: {
         type: String,
         required: false,
@@ -20,9 +25,7 @@ const notificationSchema = new Schema({
     },
     role: {
         type: String,
-        required: false,
-        enum: roles,
-        default: null,
+        required: false,  
     },
     title: {
         type: String,

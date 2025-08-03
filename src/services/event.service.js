@@ -1,9 +1,18 @@
 const httpStatus = require("http-status");
-const { Event, User } = require("../models");
+const { Event, User, Notification } = require("../models");
 const ApiError = require("../utils/ApiError");
 
 const createEvent = async (data) => {
     const event = await Event.create(data);
+ 
+
+    const notification = await Notification.create({
+        title: "New Event Created Requested successfully",
+        content: "New Event Created Requested successfully",
+        routeringPath: "event",
+        userId: event.createdBy,
+    });
+
     return event;
 };
 
