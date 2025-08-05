@@ -12,7 +12,6 @@ router
         if (!notifications)
             return res.status(404)
                 .json({ message: "Notifications not found" });
-                
         res.status(200).json(notifications);
     }))
 
